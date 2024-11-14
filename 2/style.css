@@ -8,20 +8,30 @@
 body {
     color: #333;
     line-height: 1.6;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+   transition: background-color 1s ; /* Płynna zmiana koloru tła */
+}
+
+.section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(50px) scale(0.9) rotateX(10deg);
+    transition: opacity 0.8s , transform 0.8s ; /* Opóźnienie 0.3s dla tekstu */
+}
+
+.section.active {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0);
 }
 
 .container {
     width: 80%;
     max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-header {
     text-align: center;
-    padding: 50px 0;
-    background-color: #282c34;
-    color: #fff;
 }
 
 .profile-photo {
@@ -35,24 +45,14 @@ h1 {
     font-size: 2.5em;
 }
 
-header p {
+p {
     font-size: 1.2em;
-    color: #b0bec5;
-}
-
-section {
-    margin: 30px 0;
 }
 
 h2 {
-    text-align: center;
     font-size: 2em;
     margin-bottom: 20px;
     color: #333;
-}
-
-#about p, #skills ul, #projects .project p, #contact p {
-    text-align: center;
 }
 
 #skills ul {
@@ -70,8 +70,7 @@ h2 {
 }
 
 .project {
-    text-align: center;
-    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .project h3 {
@@ -106,3 +105,10 @@ footer {
     background-color: #f1f1f1;
     color: #666;
 }
+
+/* Kolory tła dla sekcji */
+#header { background-color: #ed730f; }
+#about { background-color: #3498db; }
+#skills { background-color: #27ae60; }
+#projects { background-color: #e74c3c; }
+#contact { background-color: #8e44ad; }
