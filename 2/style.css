@@ -3,36 +3,71 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
+    overflow: hidden;
+    scroll-behavior: smooth;
 }
 
+/* Tło całej strony */
 body {
+    background-color: #f0f0f0; /* Jasnoszare tło dla całej strony */
     color: #333;
+    font-size: 18px;
     line-height: 1.6;
-    overflow-x: hidden;
     scroll-behavior: smooth;
-   transition: background-color 1s ; /* Płynna zmiana koloru tła */
+    overflow: hidden;
+}
+
+#header h1 {
+    font-size: clamp(2.5em, 5vw, 4em);  /* Zwiększamy rozmiar czcionki */
+    font-weight: bold; /* Opcjonalnie wytłuszczenie */
+    color: white; /* Kolor czcionki, np. biały */
+    mix-blend-mode: difference;
+    /*text-align: center;*/
+    word-wrap: nowrap;
+    /*background-color: rgb(217 15 15 / 88%); /* Pomarańczowe tło */
+    /*text-transform: uppercase; /* Opcjonalnie, aby imię i nazwisko były dużymi literami */
+}
+#header .container {
+    max-width: 90%; /* Zmniejszenie szerokości kontenera */
+    margin: 0 auto; /* Wyśrodkowanie */
 }
 
 .section {
-    height: 100vh;
+    min-height: 85vh; /* Wysokość sekcji */
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
     opacity: 0;
     transform: translateY(50px) scale(0.9) rotateX(10deg);
-    transition: opacity 0.8s , transform 0.8s ; /* Opóźnienie 0.3s dla tekstu */
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    border: 3px solid #333; /* Kolor ramki */
+    background-color: #ffffff; /* Wewnętrzne tło sekcji */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Dodanie cienia */
+    border-radius: 15px; /* Zaokrąglenie rogów */
+    margin: 20px auto; /* Wyśrodkowanie sekcji na stronie */
+    width: 90%; /* Szerokość sekcji */
 }
+
 
 .section.active {
     opacity: 1;
     transform: translateY(0) scale(1) rotateX(0);
 }
 
+/* Stylowanie kontenera w sekcjach */
 .container {
-    width: 80%;
-    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Wyśrodkowanie w pionie */
+    align-items: center; /* Wyśrodkowanie w poziomie */
     text-align: center;
+    width: 90%;
+    max-width: 1000px;
+    padding: 20px;
+    
 }
+
 
 .profile-photo {
     width: 150px;
@@ -43,9 +78,11 @@ body {
 
 h1 {
     font-size: 2.5em;
+    color: #333; 
 }
 
 p {
+    color: #555;
     font-size: 1.2em;
 }
 
@@ -53,6 +90,7 @@ h2 {
     font-size: 2em;
     margin-bottom: 20px;
     color: #333;
+    
 }
 
 #skills ul {
@@ -60,6 +98,7 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+   /* background-color: rgba(39, 174, 96, 0.8); /* Zielone tło */
 }
 
 #skills li {
@@ -69,34 +108,67 @@ h2 {
     border-radius: 20px;
 }
 
-.project {
-    margin-top: 20px;
+.project { 
+    display: flex;
+    flex-direction: column; /* Elementy będą układały się jeden pod drugim */
+    justify-content: center; /* Wyśrodkowanie w pionie */
+    align-items: flex-start; /* Ustawienie elementów przy lewej krawędzi (tylko dla tekstu) */
+    text-align: left; /* Wyrównanie tekstu do lewej */
+    padding: 20px;
+    background-color: #ff8c8c45;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    height: 100%; /* Ustawienie pełnej wysokości, aby flex działał w pionie */
 }
 
 .project h3 {
-    font-size: 1.5em;
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+    display: block; /* Link jako blokowy, aby lepiej zarządzać odstępami */
+    margin: 10px auto; 
 }
 
+.project ul {
+    list-style: disc;
+    margin-left: 20px;
+    color: #555;
+}
+
+.project p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+
 .project a {
-    display: inline-block;
+    display: inline-block; /* Link traktowany jak blok */
     padding: 10px 20px;
-    background-color: #3498db;
+    background-color: #3498db; /* Niebieski kolor przycisku */
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
-    margin-top: 10px;
+    margin: 20px auto; /* Automatycznie centrowany */
+    transition: background-color 0.3s ease;
+}
+
+.project a:hover {
+    background-color: #2879b9; /* Ciemniejszy niebieski przy najechaniu */
 }
 
 .socials {
     display: flex;
     justify-content: center;
     gap: 20px;
+    /*background-color: rgba(39, 174, 96, 0.8); /* Zielone tło */
 }
 
 .social {
     color: #3498db;
     text-decoration: none;
     font-weight: bold;
+    /*background-color: rgba(2, 10, 5, 0.8); /* Zielone tło */
 }
 
 footer {
@@ -106,9 +178,49 @@ footer {
     color: #666;
 }
 
-/* Kolory tła dla sekcji */
-#header { background-color: #ed730f; }
-#about { background-color: #3498db; }
-#skills { background-color: #27ae60; }
-#projects { background-color: #e74c3c; }
-#contact { background-color: #8e44ad; }
+
+/* Tło sekcji specyficzne dla każdej */
+/* Sekcja Header */
+#header {
+    background-color: #ffe6cc; /* Tło wewnątrz sekcji (jasny pomarańcz) */
+    border: 5px solid #f39c12; /* Ramka (ciemniejszy pomarańcz) */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Delikatny cień */
+}
+
+/* Sekcja About */
+#about {
+    background-color: #e6f7ff; /* Tło wewnątrz sekcji (jasny niebieski) */
+    border: 5px solid #3498db; /* Ramka (średni niebieski) */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Delikatny cień */
+}
+
+/* Sekcja Skills */
+#skills {
+    background-color: #e6ffe6; /* Tło wewnątrz sekcji (jasny zielony) */
+    border: 5px solid #27ae60; /* Ramka (ciemniejszy zielony) */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Delikatny cień */
+}
+
+/* Sekcja Projects */
+#projects {
+    background-color: #ffe6e6; /* Tło wewnątrz sekcji (jasny czerwony) */
+    border: 5px solid #e74c3c; /* Ramka (ciemniejszy czerwony) */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Delikatny cień */
+}
+
+/* Sekcja Contact */
+#contact {
+    background-color: #f4e6ff; /* Tło wewnątrz sekcji (jasny fiolet) */
+    border: 5px solid #8e44ad; /* Ramka (ciemniejszy fiolet) */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Delikatny cień */
+}

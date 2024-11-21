@@ -1,7 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
     const sections = document.querySelectorAll(".section");
+    const body = document.body;
     let currentSectionIndex = 0;
     let isAnimating = false;
+
+    // Przewiń do góry na starcie i ustaw pierwszą sekcję jako aktywną
+    window.scrollTo(0, 0);
+    sections[currentSectionIndex].classList.add("active");
+    body.style.backgroundColor = getComputedStyle(sections[currentSectionIndex]).backgroundColor;
 
     // Funkcja do przewijania i aktualizacji sekcji
     function scrollToSection(index) {
@@ -9,10 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         isAnimating = true;
 
-        // Zmień kolor tła od razu
-        document.body.style.backgroundColor = getComputedStyle(sections[index]).backgroundColor;
+        // Ustaw kolor tła na nowy
+        const newColor = getComputedStyle(sections[index]).backgroundColor;
+        body.style.backgroundColor = newColor;
 
-        // Ustaw aktywność sekcji
+        // Dodaj klasę .active dla nowej sekcji, usuń z pozostałych
         sections.forEach((section, i) => {
             if (i === index) {
                 section.classList.add("active");
@@ -21,19 +28,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // Przewiń do nowej sekcji
-        sections[index].scrollIntoView({ behavior: "smooth" });
+        // Przewiń na środek nowej sekcji
+        sections[index].scrollIntoView({
+            behavior: "smooth",
+            block: "center", // Ustawia sekcję w środku ekranu
+        });
+
         currentSectionIndex = index;
 
-        // Zablokuj przewijanie do zakończenia animacji
+        // Odblokuj animację po zakończeniu
         setTimeout(() => {
             isAnimating = false;
-        }, 800); // Dopasowany do czasu trwania animacji w CSS
+        }, 800); // Czas dopasowany do CSS
     }
-
-    // Ustawienie pierwszej sekcji jako aktywnej podczas ładowania strony
-    sections[currentSectionIndex].classList.add("active");
-    document.body.style.backgroundColor = getComputedStyle(sections[currentSectionIndex]).backgroundColor;
 
     // Obsługa przewijania kółkiem myszy
     window.addEventListener("wheel", (event) => {
