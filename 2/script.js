@@ -12,14 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // Funkcja do przewijania i aktualizacji sekcji
     function scrollToSection(index) {
         if (index < 0 || index >= sections.length || isAnimating) return;
-
+    
         isAnimating = true;
-
-        // Ustaw kolor tła na nowy
+    
         const newColor = getComputedStyle(sections[index]).backgroundColor;
         body.style.backgroundColor = newColor;
-
-        // Dodaj klasę .active dla nowej sekcji, usuń z pozostałych
+    
         sections.forEach((section, i) => {
             if (i === index) {
                 section.classList.add("active");
@@ -27,21 +25,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 section.classList.remove("active");
             }
         });
-
-        // Przewiń na środek nowej sekcji
-        sections[index].scrollIntoView({
-            behavior: "smooth",
-            block: "center", // Ustawia sekcję w środku ekranu
-        });
-
+    
+        // Jeśli sekcja ma zbyt dużo treści, pozwól na naturalne przewijanie
+        if (sections[index].scrollHeight > window.innerHeight) {
+            sections[index].scrollIntoView({
+                behavior: "smooth",
+                block: "start", // Wyświetl sekcję od góry
+            });
+        } else {
+            sections[index].scrollIntoView({
+                behavior: "smooth",
+                block: "center", // Wycentruj sekcję
+            });
+        }
+    
         currentSectionIndex = index;
-
-        // Odblokuj animację po zakończeniu
+    
         setTimeout(() => {
             isAnimating = false;
-        }, 800); // Czas dopasowany do CSS
+        }, 800);
     }
-
+    
+    
     // Obsługa przewijania kółkiem myszy
     window.addEventListener("wheel", (event) => {
         if (isAnimating) return;
@@ -63,4 +68,29 @@ document.addEventListener("DOMContentLoaded", () => {
             scrollToSection(currentSectionIndex - 1);
         }
     });
+
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+window.addEventListener("touchstart", (event) => {
+    touchStartY = event.changedTouches[0].screenY;
+});
+
+window.addEventListener("touchend", (event) => {
+    touchEndY = event.changedTouches[0].screenY;
+    handleGesture();
+});
+
+function handleGesture() {
+    if (isAnimating) return;
+
+    if (touchStartY > touchEndY + 50 && currentSectionIndex < sections.length - 1) {
+        // Przesunięcie w górę (przejdź do następnej sekcji)
+        scrollToSection(currentSectionIndex + 1);
+    } else if (touchStartY < touchEndY - 50 && currentSectionIndex > 0) {
+        // Przesunięcie w dół (przejdź do poprzedniej sekcji)
+        scrollToSection(currentSectionIndex - 1);
+    }
+}
+
 });

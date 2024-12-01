@@ -3,18 +3,18 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
-    overflow: hidden;
     scroll-behavior: smooth;
+    overflow-x: hidden; /* Ukrywa tylko przewijanie w poziomie */
+    overflow-y: auto; /* Włącza przewijanie w pionie */
 }
 
 /* Tło całej strony */
 body {
-    background-color: #f0f0f0; /* Jasnoszare tło dla całej strony */
+    background-color: #f0f0f0;
     color: #333;
     font-size: 18px;
     line-height: 1.6;
-    scroll-behavior: smooth;
-    overflow: hidden;
+    overflow-y: auto; /* Umożliwia przewijanie w pionie */
 }
 
 #header h1 {
@@ -33,7 +33,7 @@ body {
 }
 
 .section {
-    min-height: 85vh; /* Wysokość sekcji */
+    min-height: auto; /*85vh Wysokość sekcji */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,13 +77,14 @@ body {
 }
 
 h1 {
-    font-size: 2.5em;
+    font-size: clamp(2em, 5vw, 4em);
     color: #333; 
 }
 
 p {
     color: #555;
-    font-size: 1.2em;
+    font-size: 1rem; /* Wielkość proporcjonalna do ustawień użytkownika */
+    line-height: 1.5;
 }
 
 h2 {
@@ -91,6 +92,28 @@ h2 {
     margin-bottom: 20px;
     color: #333;
     
+}
+
+/* Dla ekranów o szerokości poniżej 768px (tablety i telefony) */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1em; /* Zmniejsz rozmiar nagłówka */
+    }
+
+    p {
+        font-size: 0.1em; /* Zmniejsz rozmiar tekstu */
+    }
+}
+
+/* Dla ekranów o szerokości poniżej 480px (telefony) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1em; /* Jeszcze mniejszy nagłówek */
+    }
+
+    p {
+        font-size: 1em; /* Ustaw tekst na czytelny poziom */
+    }
 }
 
 #skills ul {
