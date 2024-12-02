@@ -33,7 +33,8 @@ body {
 }
 
 .section {
-    min-height: auto; /*85vh Wysokość sekcji */
+
+    min-height: 85vh; /*85vh Wysokość sekcji */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,6 +48,7 @@ body {
     border-radius: 15px; /* Zaokrąglenie rogów */
     margin: 20px auto; /* Wyśrodkowanie sekcji na stronie */
     width: 90%; /* Szerokość sekcji */
+    overflow-y: auto;
 }
 
 
