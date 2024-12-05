@@ -49,6 +49,7 @@ body {
     margin: 20px auto; /* Wyśrodkowanie sekcji na stronie */
     width: 90%; /* Szerokość sekcji */
     overflow-y: auto;
+
 }
 
 
@@ -221,7 +222,21 @@ footer {
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Delikatny cień */
+   
 }
+
+#about .container {
+    max-width: 1800px; /* Zwiększ szerokość kontenera */
+    margin: 0 auto; /* Wyśrodkuj kontener */
+    padding: 10px; /* Dodaj trochę wewnętrznych odstępów */
+}
+
+#about p {
+    font-size: 1.3rem; /* Zwiększenie rozmiaru czcionki dla akapitów */
+    line-height: 1.8; /* Wysokość linii dla lepszej czytelności */
+
+}
+
 
 /* Sekcja Skills */
 #skills {
@@ -248,4 +263,8 @@ footer {
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Delikatny cień */
+}
+#contact p{
+    font-size: 1.5rem;
+
 }
