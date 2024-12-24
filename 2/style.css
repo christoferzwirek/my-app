@@ -48,8 +48,9 @@ body {
     border-radius: 15px; /* Zaokrąglenie rogów */
     margin: 20px auto; /* Wyśrodkowanie sekcji na stronie */
     width: 90%; /* Szerokość sekcji */
-    overflow-y: auto;
-
+    box-sizing: border-box;
+    overflow: hidden;
+    flex-direction: column;
 }
 
 

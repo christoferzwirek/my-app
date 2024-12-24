@@ -16,12 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (index < 0 || index >= sections.length || isAnimating) return;
     
         isAnimating = true;
-
     
         const newColor = getComputedStyle(sections[index]).backgroundColor;
         body.style.backgroundColor = newColor;
     
-
         sections.forEach((section, i) => {
             if (i === index) {
                 section.classList.add("active");
@@ -29,32 +27,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 section.classList.remove("active");
             }
         });
-
-
-        // Przewiń sekcję
-        sections[index].scrollIntoView({
-            behavior: "smooth",
-            block: "start", // Zawsze wyświetlaj sekcję od góry
-        });
-
-        currentSectionIndex = index;
-
+    
+        // Sprawdź, czy sekcja ma więcej treści niż widok
         if (sections[index].scrollHeight > window.innerHeight) {
             sections[index].scrollIntoView({
                 behavior: "smooth",
                 block: "start", // Przewiń na górę sekcji
             });
         } else {
-            sections[index].scrollIntoView({
+            // Wyśrodkowanie sekcji na ekranie
+            const offset = (window.innerHeight - sections[index].offsetHeight) / 2;
+            window.scrollTo({
+                top: sections[index].offsetTop - offset,
                 behavior: "smooth",
-                block: "center", // Wycentruj krótsze sekcje
             });
         }
-
-
+    
+        currentSectionIndex = index;
+    
         setTimeout(() => {
             isAnimating = false;
-        }, 800);
+        }, 800); // Dopasowanie do animacji w CSS
     }
     
     
